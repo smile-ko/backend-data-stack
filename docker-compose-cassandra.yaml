@@ -1,0 +1,17 @@
+services:
+  cassandra:
+    image: cassandra:4.0
+    restart: always
+    environment:
+      CASSANDRA_CLUSTER_NAME: "CASSANDRA_CLUSTER_NAME"
+      CASSANDRA_USER: cassandra
+      CASSANDRA_PASSWORD: cassandra
+      JVM_OPTS: "-Dcassandra.cdc_enabled=true"
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+
+volumes:
+  cassandra_data:
+    driver: local

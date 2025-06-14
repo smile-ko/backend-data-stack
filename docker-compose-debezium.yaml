@@ -1,0 +1,23 @@
+services:
+  debezium:
+    image: quay.io/debezium/connect:latest
+    container_name: debezium
+    restart: always
+    environment:
+      BOOTSTRAP_SERVERS: "kafka:9092"
+      GROUP_ID: "kafka-connect-group"
+      CONFIG_STORAGE_TOPIC: "connect-configs"
+      OFFSET_STORAGE_TOPIC: "connect-offsets"
+      STATUS_STORAGE_TOPIC: "connect-status"
+      CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_REST_ADVERTISED_HOST_NAME: "debezium"
+      CONNECT_PLUGIN_PATH: "/kafka/connect"
+    ports:
+      - "8083:8083"
+    volumes:
+      - debezium_data:/kafka/connect
+
+volumes:
+  debezium_data:
+    driver: local

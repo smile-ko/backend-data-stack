@@ -1,0 +1,44 @@
+@baseUrl=http://localhost:8083
+
+### Create connector
+POST {{baseUrl}}/connectors
+Content-Type: application/json
+
+{
+  "name": "connector-name",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "loaclhost",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "postgres",
+    "database.server.name": "sync_data_server",
+    "table.include.list": "public.table-name",
+    "plugin.name": "pgoutput",
+    "slot.name": "debezium_slot_sysnc_data",
+    "publication.name": "debezium_pub",
+    "database.history.kafka.bootstrap.servers": "kafka:9092",
+    "database.history.kafka.topic": "schema-changes.db_history",
+    "topic.prefix": "topic_name",
+    "snapshot.mode": "initial",
+    "include.before.image": true
+  }
+}
+
+### Check list of connectors
+GET {{baseUrl}}/connectors
+
+### Get config
+GET {{baseUrl}}/connectors/connector-name/config
+
+### Check status
+GET {{baseUrl}}/connectors/connector-name/status
+
+### Restart
+POST {{baseUrl}}/connectors/connector-name/restart
+
+### Delete connector
+DELETE {{baseUrl}}/connectors/connector-name
+
+
