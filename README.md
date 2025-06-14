@@ -60,6 +60,73 @@ Copy the generated token and update it in the `kibana.yml` file under `elasticse
 docker ps
 ```
 
+## Management Script
+
+We provide a convenient management script (`manage.sh`) to help you manage all services easily.
+
+### Setup the Script
+
+1. Make the script executable:
+
+```bash
+chmod +x manage.sh
+```
+
+### Available Commands
+
+1. Start all services:
+
+```bash
+./manage.sh start
+```
+
+2. Stop all services:
+
+```bash
+./manage.sh stop
+```
+
+3. Restart all services:
+
+```bash
+./manage.sh restart
+```
+
+4. Check service status:
+
+```bash
+./manage.sh status
+```
+
+5. View logs for a specific service:
+
+```bash
+./manage.sh logs <service_name>
+```
+
+Available services for logs:
+
+- postgres
+- kafka
+- zookeeper
+- debezium
+- elasticsearch
+- kibana
+- cassandra
+- redis
+
+6. Generate Elasticsearch token for Kibana:
+
+```bash
+./manage.sh token
+```
+
+7. Show help:
+
+```bash
+./manage.sh help
+```
+
 ## Service Access
 
 ### PostgreSQL
